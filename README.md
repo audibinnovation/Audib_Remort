@@ -1,57 +1,55 @@
-📱 AudibRemote – Android Bluetooth Remote
-AudibRemote is an Android application built in Android Studio that lets you control your amplifier or audio system via Bluetooth. It provides a modern Material-themed UI, responsive Flexbox layout, and robust Bluetooth connectivity with auto-reconnect support.
+# 📱 AudibRemote – Android Bluetooth Remote
 
-✨ Features
-• 	🔌 Bluetooth Controls
-• 	Enable/disable Bluetooth
-• 	Scan and select paired devices
-• 	Connect/disconnect with auto-reconnect
-• 	🎛️ Amplifier Commands
-• 	Power toggle
-• 	Volume up/down, mute
-• 	Input selection (, next/previous input)
-• 	Audio features: Menu, Loudness, Surround, 3D, Tone Bypass
-• 	📻 FM Controls
-• 	FM tuning up/down
-• 	Mode, RDS, Store, Mono
-• 	🔢 Numeric Keypad
-• 	Digits  for quick input
-• 	🕒 System Controls
-• 	Time, Alarm, Timer
-• 	Display, Spectrum, Brightness, Full Speed
+AudibRemote is an Android application built in **Android Studio** that lets you control your amplifier or audio system via Bluetooth. It provides a modern Material-themed UI, responsive Flexbox layout, and robust Bluetooth connectivity with auto-reconnect support.
 
-🛠️ Tech Stack
-• 	Language: Kotlin
-• 	UI: XML with FlexboxLayout + Material Components
-• 	Architecture: ViewBinding-ready, modular command mapping
-• 	Bluetooth: Classic SPP ()
-• 	Persistence: SharedPreferences (KTX) for last device auto-reconnect
-• 	Theme: Material Dark with custom colors (black background, teal accents)
+---
 
-📂 Project Structure
-• 	 → Bluetooth lifecycle, command mapping, connection management
-• 	 → Flexbox-based remote control UI
-• 	 → Permissions and activity declaration
-• 	 → Labels for all controls
-• 	 → Color palette
-• 	 → Material theme setup
+## ✨ Features
+- 🔌 **Bluetooth Controls**
+  - Enable/disable Bluetooth
+  - Scan and select paired devices
+  - Connect/disconnect with auto-reconnect
 
-🚀 Getting Started
-1. 	Clone the repository:
+- 🎛️ **Amplifier Commands**
+  - Power toggle
+  - Volume up/down, mute
+  - Input selection (`IN0–IN4`, next/previous input)
+  - Audio features: Menu, Loudness, Surround, 3D, Tone Bypass
 
-2. 	Open in Android Studio.
-3. 	Build and run on your device (tested on Nothing Phone 3).
-4. 	Pair your amplifier/audio system via Bluetooth.
-5. 	Launch the app and start controlling!
+- 📻 **FM Controls**
+  - FM tuning up/down
+  - Mode, RDS, Store, Mono
 
-📸 Screenshots
-(Add screenshots here once you capture them from your device)
+- 🔢 **Numeric Keypad**
+  - Digits `0–9` for quick input
 
-⚡ Future Improvements
-• 	Migrate to ViewBinding + Coroutines for cleaner lifecycle-aware code.
-• 	Add MaterialCardView grouping for better UI readability.
-• 	Integrate icons for common actions (Power, Volume, Bluetooth).
-• 	Improve accessibility with content descriptions.
+- 🕒 **System Controls**
+  - Time, Alarm, Timer
+  - Display, Spectrum, Brightness, Full Speed
 
-📄 License
-This project is licensed under the MIT License – feel free to use and modify.
+---
+
+## 🛠️ Tech Stack
+- **Language:** Kotlin
+- **UI:** XML with FlexboxLayout + Material Components
+- **Architecture:** ViewBinding-ready, modular command mapping
+- **Bluetooth:** Classic SPP (`00001101-0000-1000-8000-00805F9B34FB`)
+- **Persistence:** SharedPreferences (KTX) for last device auto-reconnect
+- **Theme:** Material Dark with custom colors (black background, teal accents)
+
+---
+
+## 📂 Project Structure
+- `MainActivity.kt` → Bluetooth lifecycle, command mapping, connection management
+- `activity_main.xml` → Flexbox-based remote control UI
+- `AndroidManifest.xml` → Permissions and activity declaration
+- `res/values/strings.xml` → Labels for all controls
+- `res/values/colors.xml` → Color palette
+- `res/values/themes.xml` → Material theme setup
+
+---
+
+## 🚀 Getting Started
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/AudibRemote.git
