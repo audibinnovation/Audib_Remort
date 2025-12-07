@@ -17,6 +17,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.io.OutputStream
 import java.util.*
@@ -33,7 +37,14 @@ class MainActivity : AppCompatActivity() {
     private val sppUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
     private val btPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { }
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
+            // ✅ Handle permission result
+            if (result.values.any { it }) {
+                updateStatus()
+            } else {
+                Toast.makeText(this, getString(R.string.bluetooth_permission_denied), Toast.LENGTH_SHORT).show()
+            }
+        }
 
     private val enableBtLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { updateStatus() }
@@ -199,6 +210,7 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
+    // ✅ Coroutine-based connect
     private fun connectToSelected() {
         ensurePermissions()
         val dev = selectedDevice
@@ -207,14 +219,21 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        Thread {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
-                    != PackageManager.PERMISSION_GRANTED) {
-                    runOnUiThread {
-                        Toast.makeText(this, getString(R.string.bluetooth_permission_denied), Toast.LENGTH_SHORT).show()
+                if (ActivityCompat.checkSelfPermission(
+                        this@MainActivity,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            getString(R.string.bluetooth_permission_denied),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                    return@Thread
+                    return@launch
                 }
 
                 socket = dev.createRfcommSocketToServiceRecord(sppUUID)
@@ -222,58 +241,79 @@ class MainActivity : AppCompatActivity() {
                 socket?.connect()
                 outputStream = socket?.outputStream
 
-                runOnUiThread {
-                    Toast.makeText(this, getString(R.string.connected_to, dev.name), Toast.LENGTH_SHORT).show()
-                    saveLastDeviceAddress(dev.address) // ✅ Save persistently
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.connected_to, dev.name),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    saveLastDeviceAddress(dev.address)
                     updateStatus()
-                }
-            } catch (_: SecurityException) {
-                runOnUiThread {
-                    Toast.makeText(this, getString(R.string.missing_bluetooth_permission), Toast.LENGTH_LONG).show()
                 }
             } catch (e: IOException) {
-                runOnUiThread {
-                    Toast.makeText(this, getString(R.string.connection_failed, e.message ?: ""), Toast.LENGTH_LONG).show()
+                closeSocketQuietly()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.connection_failed, e.message ?: ""),
+                        Toast.LENGTH_LONG
+                    ).show()
                     updateStatus()
                 }
-                closeSocketQuietly()
-                e.printStackTrace()
             }
-        }.start()
+        }
     }
 
-    // 🔄 Auto-reconnect method
+    // ✅ Auto-reconnect with coroutine
     private fun reconnectToDevice() {
-        if (selectedDevice == null) return
-        Thread {
+        val dev = selectedDevice ?: return
+        if (bluetoothAdapter?.isEnabled != true) return
+
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
-                    != PackageManager.PERMISSION_GRANTED) {
-                    runOnUiThread {
-                        Toast.makeText(this, getString(R.string.bluetooth_permission_denied), Toast.LENGTH_SHORT).show()
+                if (ActivityCompat.checkSelfPermission(
+                        this@MainActivity,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            getString(R.string.bluetooth_permission_denied),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                    return@Thread
+                    return@launch
                 }
 
-                socket = selectedDevice!!.createRfcommSocketToServiceRecord(sppUUID)
+                socket = dev.createRfcommSocketToServiceRecord(sppUUID)
                 bluetoothAdapter?.cancelDiscovery()
                 socket?.connect()
                 outputStream = socket?.outputStream
 
-                runOnUiThread {
-                    Toast.makeText(this, getString(R.string.connected_to, selectedDevice!!.name), Toast.LENGTH_SHORT).show()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.connected_to, dev.name),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     updateStatus()
                 }
             } catch (_: Exception) {
-                runOnUiThread {
-                    Toast.makeText(this, getString(R.string.connection_failed, "Reconnect failed"), Toast.LENGTH_LONG).show()
+                closeSocketQuietly()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.connection_failed, "Reconnect failed"),
+                        Toast.LENGTH_LONG
+                    ).show()
                     updateStatus()
                 }
-                closeSocketQuietly()
             }
-        }.start()
+        }
     }
 
+    // ✅ Robust sendCommand with auto-disconnect on failure
     private fun sendCommand(code: String) {
         val os = outputStream
         if (os == null) {
@@ -286,8 +326,8 @@ class MainActivity : AppCompatActivity() {
             os.flush()
             Toast.makeText(this, getString(R.string.sent_command, fullCmd), Toast.LENGTH_SHORT).show()
         } catch (e: IOException) {
+            disconnect() // ✅ Reset state on failure
             Toast.makeText(this, getString(R.string.send_failed, e.message ?: ""), Toast.LENGTH_LONG).show()
-            e.printStackTrace()
         }
     }
 
