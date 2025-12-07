@@ -1,55 +1,64 @@
-# 📱 AudibRemote – Android Bluetooth Remote
+# AudibRemote 🎛️
 
-AudibRemote is an Android application built in **Android Studio** that lets you control your amplifier or audio system via Bluetooth. It provides a modern Material-themed UI, responsive Flexbox layout, and robust Bluetooth connectivity with auto-reconnect support.
+AudibRemote is a modern Android remote control app built with **Material 3**, **Kotlin coroutines**, and **Jetpack best practices**.  
+It provides a polished UI for managing Bluetooth audio devices, inputs, FM controls, and system features — all in one place.
 
 ---
 
 ## ✨ Features
-- 🔌 **Bluetooth Controls**
-  - Enable/disable Bluetooth
-  - Scan and select paired devices
-  - Connect/disconnect with auto-reconnect
 
-- 🎛️ **Amplifier Commands**
-  - Power toggle
-  - Volume up/down, mute
-  - Input selection (`IN0–IN4`, next/previous input)
-  - Audio features: Menu, Loudness, Surround, 3D, Tone Bypass
+- **Complete Remote Layout**
+  - Bluetooth controls (Enable, Scan, Connect, Disconnect)
+  - Power, Volume cluster (Vol‑, Mute, Vol+)
+  - Inputs (IN0–IN4, Prev/Next)
+  - Audio features (Menu, Loudness, Surround, 3D, Tone Bypass)
+  - FM controls (Up, Down, Mode, RDS, Store, Mono)
+  - Numeric keypad (0–9)
+  - System controls (Time, Alarm, Timer, Display, Spectrum, Full Speed, Bright)
 
-- 📻 **FM Controls**
-  - FM tuning up/down
-  - Mode, RDS, Store, Mono
+- **Modern UI**
+  - Built with `ConstraintLayout` for screen‑fit design
+  - Consistent global styles (`RemoteButtonStyle`, `RemoteCardStyle`)
+  - Dark theme using `Theme.Material3.Dark.NoActionBar`
 
-- 🔢 **Numeric Keypad**
-  - Digits `0–9` for quick input
-
-- 🕒 **System Controls**
-  - Time, Alarm, Timer
-  - Display, Spectrum, Brightness, Full Speed
+- **Bluetooth Stability**
+  - Connection logic migrated to Kotlin coroutines
+  - Auto‑reconnect with state/permission checks
+  - Robust socket lifecycle management
 
 ---
 
-## 🛠️ Tech Stack
-- **Language:** Kotlin
-- **UI:** XML with FlexboxLayout + Material Components
-- **Architecture:** ViewBinding-ready, modular command mapping
-- **Bluetooth:** Classic SPP (`00001101-0000-1000-8000-00805F9B34FB`)
-- **Persistence:** SharedPreferences (KTX) for last device auto-reconnect
-- **Theme:** Material Dark with custom colors (black background, teal accents)
+## 📲 Installation
 
----
-
-## 📂 Project Structure
-- `MainActivity.kt` → Bluetooth lifecycle, command mapping, connection management
-- `activity_main.xml` → Flexbox-based remote control UI
-- `AndroidManifest.xml` → Permissions and activity declaration
-- `res/values/strings.xml` → Labels for all controls
-- `res/values/colors.xml` → Color palette
-- `res/values/themes.xml` → Material theme setup
-
----
-
-## 🚀 Getting Started
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/AudibRemote.git
+2. 	Open in Android Studio (latest version recommended).
+3. 	Build and run on a device (tested on Nothing Phone 3, API 34).
+
+🚀 Usage
+• 	Launch the app and connect via Bluetooth.
+• 	Use the remote UI to control volume, inputs, audio features, FM, and system functions.
+• 	Status bar shows connection state and feedback.
+
+📝 Release Notes
+v1.1 (December 2025)
+• 	Migrated Bluetooth connection logic to coroutines for safer lifecycle management.
+• 	Improved permission handling with clear feedback on grant/deny.
+• 	Auto‑reconnect now checks Bluetooth state and permissions before attempting.
+• 	Fixed race conditions from multiple connect attempts.
+• 	 now auto‑disconnects on failure to avoid broken sockets.
+• 	Cleaned up socket lifecycle with consistent close/reset.
+• 	Better status reporting and user feedback on errors.
+• 	Removed unused exception parameter warning.
+• 	Complete remote layout with all buttons included.
+• 	Theme cleanup and Material 3 adoption.
+
+🛠 Tech Stack
+• 	Language: Kotlin
+• 	UI: Material 3, ConstraintLayout, Jetpack Compose (planned)
+• 	Bluetooth: Classic SPP bridge (ESP32 tested)
+• 	Architecture: ViewBinding, Coroutines, idiomatic Kotlin
+
+📄 License
+This project is licensed under the MIT License — see the LICENSE file for details.
