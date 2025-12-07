@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Reusable style for remote control buttons -->
+    <style name="RemoteButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textColor">@color/buttonText</item>
+        <item name="backgroundTint">@color/buttonBackground</item>
+        <item name="iconTint">@color/teal_200</item>
+    </style>
+
+    <!-- Reusable style for card sections -->
+    <style name="RemoteCardStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">8dp</item>
+        <item name="strokeColor">@color/cardStroke</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="Theme.AudibRemote" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/teal_200</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnSurface">@color/white</item>
+
+        <!-- Default styles applied globally -->
+        <item name="materialButtonStyle">@style/RemoteButtonStyle</item>
+        <item name="materialCardViewStyle">@style/RemoteCardStyle</item>
+
+        <!-- Status bar / nav bar -->
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+    </style>
+
+</resources>
