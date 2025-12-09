@@ -6,14 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.flexbox.FlexboxLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        app:flexDirection="row"
-        app:flexWrap="wrap"
-        app:justifyContent="center"
-        app:alignItems="stretch">
+        android:orientation="vertical"
+        android:padding="12dp">
 
         <!-- Status -->
         <TextView
@@ -27,174 +24,174 @@
             android:layout_marginBottom="12dp"/>
 
         <!-- Bluetooth Controls -->
-        <Button android:id="@+id/btnEnableBT" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/enable_bt"/>
-        <Button android:id="@+id/btnScan" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/scan"/>
-        <Button android:id="@+id/btnConnect" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/connect"/>
-        <Button android:id="@+id/btnDisconnect" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/disconnect"/>
-
-        <!-- Power button separate -->
-        <Button android:id="@+id/btnPower" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_gravity="center" android:layout_margin="12dp"
-            android:text="@string/power"/>
-
-        <!-- Centered Volume Controls -->
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            style="@style/RemoteCardStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_height="wrap_content">
 
-            <Button android:id="@+id/btnVolDown" style="?attr/materialButtonStyle"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:layout_margin="12dp" android:text="@string/vol_down"/>
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:justifyContent="center">
 
-            <Button android:id="@+id/btnMute" style="?attr/materialButtonStyle"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:layout_margin="12dp" android:text="@string/mute"/>
+                <Button android:id="@+id/btnEnableBT" style="@style/RemoteButtonStyle" android:text="@string/enable_bt"/>
+                <Button android:id="@+id/btnScan" style="@style/RemoteButtonStyle" android:text="@string/scan"/>
+                <Button android:id="@+id/btnConnect" style="@style/RemoteButtonStyle" android:text="@string/connect"/>
+                <Button android:id="@+id/btnDisconnect" style="@style/RemoteButtonStyle" android:text="@string/disconnect"/>
+            </com.google.android.flexbox.FlexboxLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-            <Button android:id="@+id/btnVolUp" style="?attr/materialButtonStyle"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:layout_margin="12dp" android:text="@string/vol_up"/>
-        </LinearLayout>
+        <!-- Power -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/RemoteCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <Button android:id="@+id/btnPower" style="@style/RemoteButtonStyle" android:text="@string/power"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Volume Controls -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/RemoteCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <Button android:id="@+id/btnVolDown" style="@style/RemoteButtonStyle" android:text="@string/vol_down"/>
+                <Button android:id="@+id/btnMute" style="@style/RemoteButtonStyle" android:text="@string/mute"/>
+                <Button android:id="@+id/btnVolUp" style="@style/RemoteButtonStyle" android:text="@string/vol_up"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Inputs -->
-        <Button android:id="@+id/btnIN0" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/in0"/>
-        <Button android:id="@+id/btnIN1" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/in1"/>
-        <Button android:id="@+id/btnIN2" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/in2"/>
-        <Button android:id="@+id/btnIN3" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/in3"/>
-        <Button android:id="@+id/btnIN4" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/in4"/>
-        <Button android:id="@+id/btnPrevIN" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/prev_in"/>
-        <Button android:id="@+id/btnNextIN" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/next_in"/>
+        <com.google.android.material.card.MaterialCardView
+            style="@style/RemoteCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:justifyContent="center">
+
+                <Button android:id="@+id/btnIN0" style="@style/RemoteButtonStyle" android:text="@string/in0"/>
+                <Button android:id="@+id/btnIN1" style="@style/RemoteButtonStyle" android:text="@string/in1"/>
+                <Button android:id="@+id/btnIN2" style="@style/RemoteButtonStyle" android:text="@string/in2"/>
+                <Button android:id="@+id/btnIN3" style="@style/RemoteButtonStyle" android:text="@string/in3"/>
+                <Button android:id="@+id/btnIN4" style="@style/RemoteButtonStyle" android:text="@string/in4"/>
+                <Button android:id="@+id/btnPrevIN" style="@style/RemoteButtonStyle" android:text="@string/prev_in"/>
+                <Button android:id="@+id/btnNextIN" style="@style/RemoteButtonStyle" android:text="@string/next_in"/>
+            </com.google.android.flexbox.FlexboxLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Audio Features -->
-        <Button android:id="@+id/btnMenu" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/menu"/>
-        <Button android:id="@+id/btnLoudness" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/loudness"/>
-        <Button android:id="@+id/btnSurround" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/surround"/>
-        <Button android:id="@+id/btn3D" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/three_d"/>
-        <Button android:id="@+id/btnToneBypass" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/tone_bypass"/>
+        <com.google.android.material.card.MaterialCardView
+            style="@style/RemoteCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:justifyContent="center">
+
+                <Button android:id="@+id/btnMenu" style="@style/RemoteButtonStyle" android:text="@string/menu"/>
+                <Button android:id="@+id/btnLoudness" style="@style/RemoteButtonStyle" android:text="@string/loudness"/>
+                <Button android:id="@+id/btnSurround" style="@style/RemoteButtonStyle" android:text="@string/surround"/>
+                <Button android:id="@+id/btn3D" style="@style/RemoteButtonStyle" android:text="@string/three_d"/>
+                <Button android:id="@+id/btnToneBypass" style="@style/RemoteButtonStyle" android:text="@string/tone_bypass"/>
+            </com.google.android.flexbox.FlexboxLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- FM Controls -->
-        <Button android:id="@+id/btnFMUp" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/fm_up"/>
-        <Button android:id="@+id/btnFMDown" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/fm_down"/>
-        <Button android:id="@+id/btnFMMode" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/fm_mode"/>
-        <Button android:id="@+id/btnRDS" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/rds"/>
-        <Button android:id="@+id/btnFMStore" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/fm_store"/>
-        <Button android:id="@+id/btnFMMono" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/fm_mono"/>
+        <com.google.android.material.card.MaterialCardView
+            style="@style/RemoteCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:justifyContent="center">
+
+                <Button android:id="@+id/btnFMUp" style="@style/RemoteButtonStyle" android:text="@string/fm_up"/>
+                <Button android:id="@+id/btnFMDown" style="@style/RemoteButtonStyle" android:text="@string/fm_down"/>
+                <Button android:id="@+id/btnFMMode" style="@style/RemoteButtonStyle" android:text="@string/fm_mode"/>
+                <Button android:id="@+id/btnRDS" style="@style/RemoteButtonStyle" android:text="@string/rds"/>
+                <Button android:id="@+id/btnFMStore" style="@style/RemoteButtonStyle" android:text="@string/fm_store"/>
+                <Button android:id="@+id/btnFMMono" style="@style/RemoteButtonStyle" android:text="@string/fm_mono"/>
+            </com.google.android.flexbox.FlexboxLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Numeric Keypad -->
-        <Button android:id="@+id/btn1" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_1"/>
-        <Button android:id="@+id/btn2" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_2"/>
-        <Button android:id="@+id/btn3" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_3"/>
-        <Button android:id="@+id/btn4" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_4"/>
+        <com.google.android.material.card.MaterialCardView
+            style="@style/RemoteCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button android:id="@+id/btn5" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_5"/>
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:justifyContent="center">
 
-        <Button android:id="@+id/btn6" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_6"/>
-
-        <Button android:id="@+id/btn7" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_7"/>
-
-        <Button android:id="@+id/btn8" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_8"/>
-
-        <Button android:id="@+id/btn9" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_9"/>
-
-        <Button android:id="@+id/btn0" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/digit_0"/>
+                <Button android:id="@+id/btn1" style="@style/RemoteButtonStyle" android:text="@string/digit_1"/>
+                <Button android:id="@+id/btn2" style="@style/RemoteButtonStyle" android:text="@string/digit_2"/>
+                <Button android:id="@+id/btn3" style="@style/RemoteButtonStyle" android:text="@string/digit_3"/>
+                <Button android:id="@+id/btn4" style="@style/RemoteButtonStyle" android:text="@string/digit_4"/>
+                <Button android:id="@+id/btn5" style="@style/RemoteButtonStyle" android:text="@string/digit_5"/>
+                <Button android:id="@+id/btn6" style="@style/RemoteButtonStyle" android:text="@string/digit_6"/>
+                <Button android:id="@+id/btn7" style="@style/RemoteButtonStyle" android:text="@string/digit_7"/>
+                <Button android:id="@+id/btn8" style="@style/RemoteButtonStyle" android:text="@string/digit_8"/>
+                <Button android:id="@+id/btn9" style="@style/RemoteButtonStyle" android:text="@string/digit_9"/>
+                <Button android:id="@+id/btn0" style="@style/RemoteButtonStyle" android:text="@string/digit_0"/>
+            </com.google.android.flexbox.FlexboxLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- System Controls -->
-        <Button android:id="@+id/btnTime" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/time"/>
+        <com.google.android.material.card.MaterialCardView
+            style="@style/RemoteCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button android:id="@+id/btnAlarm" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:minWidth="48dp" android:minHeight="48dp"
-            android:layout_margin="8dp" android:text="@string/alarm"/>
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:justifyContent="center">
 
-        <Button android:id="@+id/btnTimer" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/timer"/>
+                <Button android:id="@+id/btnTime" style="@style/RemoteButtonStyle" android:text="@string/time"/>
+                <Button android:id="@+id/btnAlarm" style="@style/RemoteButtonStyle" android:text="@string/alarm"/>
+                <Button android:id="@+id/btnTimer" style="@style/RemoteButtonStyle" android:text="@string/timer"/>
+                <Button android:id="@+id/btnDisplay" style="@style/RemoteButtonStyle" android:text="@string/display"/>
+                <Button android:id="@+id/btnSpectrum" style="@style/RemoteButtonStyle" android:text="@string/spectrum"/>
+                <Button android:id="@+id/btnFullSpeed" style="@style/RemoteButtonStyle" android:text="@string/full_speed"/>
+                <Button android:id="@+id/btnBright" style="@style/RemoteButtonStyle" android:text="@string/bright"/>
+            </com.google.android.flexbox.FlexboxLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <Button android:id="@+id/btnDisplay" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/display"/>
-
-        <Button android:id="@+id/btnSpectrum" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/spectrum"/>
-
-        <Button android:id="@+id/btnFullSpeed" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/full_speed"/>
-
-        <Button android:id="@+id/btnBright" style="?attr/materialButtonStyle"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_margin="8dp" android:text="@string/bright"/>
-
-    </com.google.android.flexbox.FlexboxLayout>
+    </LinearLayout>
 </ScrollView>
