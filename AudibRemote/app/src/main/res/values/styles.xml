@@ -5,7 +5,7 @@
     <style name="RemoteButtonStyle" parent="Widget.Material3.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_margin">1dp</item>
         <item name="cornerRadius">12dp</item>
         <item name="android:textColor">@color/buttonText</item>
         <item name="backgroundTint">@color/buttonBackground</item>
