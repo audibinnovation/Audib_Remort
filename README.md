@@ -1,4 +1,4 @@
-# AudibRemote 🎛️
+# AudibControl 🎛️
 
 AudibRemote is a modern Android remote control app built with **Material 3**, **Kotlin coroutines**, and **Jetpack best practices**.  
 It provides a polished UI for managing Bluetooth audio devices, inputs, FM controls, and system features — all in one place.
