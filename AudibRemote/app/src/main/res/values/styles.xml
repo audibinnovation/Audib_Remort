@@ -9,14 +9,19 @@
         <item name="cornerRadius">12dp</item>
         <item name="android:textColor">@color/buttonText</item>
         <item name="backgroundTint">@color/buttonBackground</item>
-        <item name="iconTint">@color/teal_200</item>
+        <item name="iconTint">@color/buttonBackground</item>
+
+        <!-- Glow stroke -->
+        <item name="strokeWidth">3dp</item>
+        <item name="strokeColor">@color/buttonBackground</item>
+        <item name="rippleColor">@color/accentOrange</item>
     </style>
 
     <!-- Reusable style for card sections -->
     <style name="RemoteCardStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardCornerRadius">16dp</item>
         <item name="cardElevation">8dp</item>
-        <item name="strokeColor">@color/cardStroke</item>
+        <item name="strokeColor">@color/accentOrange</item>
         <item name="strokeWidth">2dp</item>
         <item name="android:layout_marginBottom">20dp</item>
     </style>
