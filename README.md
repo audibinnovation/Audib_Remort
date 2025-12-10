@@ -47,18 +47,35 @@ v1.1 (December 2025)
 • 	Improved permission handling with clear feedback on grant/deny.
 • 	Auto‑reconnect now checks Bluetooth state and permissions before attempting.
 • 	Fixed race conditions from multiple connect attempts.
-• 	 now auto‑disconnects on failure to avoid broken sockets.
+• 	now auto‑disconnects on failure to avoid broken sockets.
 • 	Cleaned up socket lifecycle with consistent close/reset.
 • 	Better status reporting and user feedback on errors.
 • 	Removed unused exception parameter warning.
 • 	Complete remote layout with all buttons included.
 • 	Theme cleanup and Material 3 adoption.
 
+📢 Release Notes
+v1.3
+• 	Fixed crash when enabling Bluetooth without Nearby Devices permission
+• 	Added dark blue glow effect for buttons
+• 	Status text separated from system notification bar
+• 	Expanded color palette with semantic states (Connected, Disconnected, Scanning)
+
+ v1.4
+• 	Introduced Material3 Dark Theme
+• 	Added global styles for buttons and cards
+• 	Implemented FlexboxLayout for responsive button arrangement
+• 	Auto‑reconnect to last paired Bluetooth device
+• 	Improved amplifier command mapping and error handling
+
 🛠 Tech Stack
 • 	Language: Kotlin
 • 	UI: Material 3, ConstraintLayout, Jetpack Compose (planned)
 • 	Bluetooth: Classic SPP bridge (ESP32 tested)
 • 	Architecture: ViewBinding, Coroutines, idiomatic Kotlin
+
+🤝 Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
 
 📄 License
 This project is licensed under the MIT License — see the LICENSE file for details.
