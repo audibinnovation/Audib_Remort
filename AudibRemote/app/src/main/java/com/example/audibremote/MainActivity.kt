@@ -1,4 +1,4 @@
-package com.example.audibremote
+package com.audib.remotecontrol
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
@@ -151,12 +151,21 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.bluetooth_not_supported), Toast.LENGTH_SHORT).show()
             return
         }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
-            == PackageManager.PERMISSION_GRANTED && bluetoothAdapter?.isEnabled == true) {
+
+        // Check runtime permission first
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
+            != PackageManager.PERMISSION_GRANTED) {
+            btPermissionLauncher.launch(arrayOf(Manifest.permission.BLUETOOTH_CONNECT))
+            return
+        }
+
+        if (bluetoothAdapter?.isEnabled == true) {
             Toast.makeText(this, getString(R.string.bluetooth_already_enabled), Toast.LENGTH_SHORT).show()
             updateStatus()
             return
         }
+
         val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
         enableBtLauncher.launch(intent)
     }
